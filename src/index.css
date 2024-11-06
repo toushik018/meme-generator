@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.moveable-control {
+    --moveable-color: #4299e1;
+}
+
+.moveable-control .moveable-line {
+    background: #4299e1;
+}
+
+.moveable-control .moveable-control-box {
+    --moveable-color: #4299e1;
+}
