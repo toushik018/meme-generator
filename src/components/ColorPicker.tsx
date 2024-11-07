@@ -15,14 +15,14 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
 }) => {
   return (
     <div className="flex items-center gap-4">
-      <span className="text-white uppercase font-bold w-32">{label}</span>
-      <div className="flex gap-2">
+      {label && <span className="text-white uppercase font-bold">{label}</span>}
+      <div className="flex gap-3">
         {colors.map((color) => (
           <button
             key={color}
             onClick={() => onChange(color)}
-            className={`w-8 h-8 rounded-full transition-transform ${
-              color === value ? 'scale-110 ring-2 ring-white' : ''
+            className={`w-8 h-8 rounded-full transition-transform hover:scale-110 ${
+              color === value ? 'ring-2 ring-white scale-110' : ''
             }`}
             style={{ backgroundColor: color }}
           />

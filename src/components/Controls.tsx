@@ -1,24 +1,35 @@
-import React from 'react';
-import { ChevronLeft, ChevronRight, Upload } from 'lucide-react';
-import { ControlProps } from '../types';
+import React, { useRef } from "react";
+import { ChevronLeft, ChevronRight, Upload } from "lucide-react";
+import { ControlProps } from "../types";
 
 export const Controls: React.FC<ControlProps> = ({
   label,
   items,
   value,
   onChange,
-  type = 'background',
+  type = "background",
 }) => {
   const currentIndex = items.indexOf(value);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handlePrev = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
     onChange(items[newIndex]);
+    scrollToImage(newIndex);
   };
 
   const handleNext = () => {
     const newIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
     onChange(items[newIndex]);
+    scrollToImage(newIndex);
+  };
+
+  const scrollToImage = (index: number) => {
+    const container = containerRef.current;
+    if (container) {
+      const imageElement = container.children[index] as HTMLElement;
+      imageElement.scrollIntoView({ behavior: "smooth", inline: "center" });
+    }
   };
 
   return (
@@ -31,16 +42,19 @@ export const Controls: React.FC<ControlProps> = ({
         <ChevronLeft className="w-5 h-5 text-white" />
       </button>
 
-      <div className="flex gap-2 overflow-x-auto p-2 flex-1">
+      <div
+        ref={containerRef}
+        className="flex gap-2 overflow-x-auto p-2 flex-1 modern-scrollbar"
+      >
         {items.map((item, index) => (
           <div
             key={item}
             onClick={() => onChange(item)}
-            className={`w-16 h-16 rounded-lg cursor-pointer transition-all ${
-              item === value ? 'ring-2 ring-blue-500 scale-110' : ''
+            className={`w-20 h-20 flex-shrink-0 rounded-lg cursor-pointer transition-all ${
+              item === value ? "ring-2 ring-blue-500 scale-110" : ""
             }`}
           >
-            {type === 'background' ? (
+            {type === "background" ? (
               <img
                 src={item}
                 alt={`Background ${index}`}
@@ -65,7 +79,6 @@ export const Controls: React.FC<ControlProps> = ({
     </div>
   );
 };
-
 export const ImageUpload: React.FC<{
   onUpload: (file: string) => void;
 }> = ({ onUpload }) => {

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .moveable-control {
     --moveable-color: #4299e1;
 }
@@ -13,4 +12,47 @@
 
 .moveable-control .moveable-control-box {
     --moveable-color: #4299e1;
+}
+
+/* Enhanced modern scrollbar styles */
+.modern-scrollbar::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background-color: transparent;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 2px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.modern-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* For Firefox */
+.modern-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* When scrolling - show more visible scrollbar */
+.modern-scrollbar:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Optional: Add padding to prevent content from being cut off */
+.modern-scrollbar {
+    padding-bottom: 5px;
 }
